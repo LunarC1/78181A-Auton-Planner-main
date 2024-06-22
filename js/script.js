@@ -409,16 +409,15 @@ function updateCode() {
         const angle = points[index + 1].theta - point.theta;
         
         if (angle) {
-            newCode += 'turnFor(' +
-            (angle < 0 ? 'right, ' : 'left, ') +
+            newCode += 'tAngle(' +
             Math.abs(formatNumberWithCeiling(angle * 180 / Math.PI)) +
-            ', degrees);\n';
+            ');\n';
         }
 
         newCode +=
-        'driveFor(forward, ' + 
+        'drive_dist(forward, ' + 
         formatNumberWithCeiling(convertPixelToFieldUnits(distance)) + 
-        ', inches);\n';
+        ');\n';
     });
 
     codeTextbox.setValue(newCode);  
