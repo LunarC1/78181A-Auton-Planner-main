@@ -398,6 +398,10 @@ function updateSidebars() {
     
 }
 
+function fmod(a,b){
+    return a % b;
+}
+
 function updateCode() {
     let newCode = '';
     points.forEach((point, index) => {
@@ -409,14 +413,14 @@ function updateCode() {
         const angle = points[index + 1].theta - point.theta;
         
         if (angle) {
-            newCode += 'tAngle(' +
-            Math.abs(formatNumberWithCeiling(angle * 180 / Math.PI)) +
+            newCode += 'turnHeading(' +
+            Math.abs(formatNumberWithCeiling(fmod(360 - (angle * 180 / Math.PI),360))) +
             ');\n';
         }
 
         newCode +=
-        'drive_dist(forward, ' + 
-        formatNumberWithCeiling(convertPixelToFieldUnits(distance)) + 
+        'driveDist(' + 
+        formatNumberWithCeiling(convertPixelToFieldUnits(distance)) +
         ');\n';
     });
 
